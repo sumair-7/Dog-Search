@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { searchDogs, getDogsByIds } from "../api";
+import { searchDogs, getDogsByIds, logoutUser, } from "../api";
 import { useFavorites } from "../contexts/FavoritesContext";
 import DogCard from "../components/DogCard";
 
-function SearchPage() {
+function SearchPage({ onLogoutSuccess }) {
   const navigate = useNavigate();
   const { favorites, setFavorites } = useFavorites();
   const [sortField, setSortField] = useState("breed");
@@ -57,6 +57,15 @@ function SearchPage() {
     );
   };
 
+  const handleLogout = async () => {
+    try {
+      await logoutUser();
+      onLogoutSuccess();
+      navigate('/login');
+    } catch (err) {
+      console.error('Logout failed:', err);
+    }
+  };
   return (
     <div className="main-container">
       <div className="search-controls">
@@ -82,6 +91,7 @@ function SearchPage() {
           {sortDirection === "asc" ? "Ascending" : "Descending"}
         </button>
         <button onClick={() => navigate("/match")}>Go to Match</button>
+        <button onClick={handleLogout}>Logout</button>
       </div>
       <div className="search-pagination">
         <button onClick={handlePrevPage} disabled={!prevUrl}>

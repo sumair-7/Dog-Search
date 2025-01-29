@@ -16,9 +16,13 @@ function App() {
           element={<LoginPage onLoginSuccess={() => setIsLoggedIn(true)} />}
         />
         <Route
-          path="/search"
-          element={isLoggedIn ? <SearchPage /> : <Navigate to="/login" replace />}
-        />
+        path="/search"
+        element={
+          isLoggedIn
+            ? <SearchPage onLogoutSuccess={() => setIsLoggedIn(false)} />
+            : <Navigate to="/login" replace />
+        }
+      />
         <Route
           path="/locations"
           element={isLoggedIn ? <LocationsPage /> : <Navigate to="/login" replace />}
