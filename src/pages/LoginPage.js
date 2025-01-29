@@ -27,7 +27,7 @@ function LoginPage({ onLoginSuccess }) {
         <p>Please log in to continue</p>
         <form onSubmit={handleSubmit} className="login-form">
           <div>
-            <label htmlFor="name">Name</label>
+            <label htmlFor="name">Name: </label>
             <input
               id="name"
               type="text"
@@ -38,7 +38,7 @@ function LoginPage({ onLoginSuccess }) {
             />
           </div>
           <div>
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">Email: </label>
             <input
               id="email"
               type="email"
